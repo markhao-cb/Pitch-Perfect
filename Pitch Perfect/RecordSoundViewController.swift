@@ -20,7 +20,6 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        audioRecorder.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
         
     }
@@ -60,7 +59,7 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         } catch _ {
             //handle error
         }
-        
+        audioRecorder.delegate = self
         audioRecorder.meteringEnabled = true
         audioRecorder.record()
     }
@@ -76,14 +75,18 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
             
         }
     }
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+        //TODO: Save the recorded audio
+        
+    }
     
     private func getAudioFileName() -> NSURL {
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-//        let currentDateTime = NSDate()
-//        let formatter = NSDateFormatter()
-//        formatter.dateFormat = "ddMMyyyy-HHmmss"
-//        let recordingName = formatter.stringFromDate(currentDateTime) + ".wav"
-        let recordingName = "my_audio.wav"
+        let currentDateTime = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyy-HHmmss"
+        let recordingName = formatter.stringFromDate(currentDateTime) + ".wav"
+//        let recordingName = "my_audio.wav"
         let pathArray = [dirPath, recordingName]
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
         return filePath!

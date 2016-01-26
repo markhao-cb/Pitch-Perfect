@@ -125,11 +125,29 @@
                                     <action selector="stopPlayAudio:" destination="as1-vb-Zco" eventType="touchUpInside" id="TED-EH-mEs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGW-si-1wW">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" image="chipmunk"/>
+                                <connections>
+                                    <action selector="playChipmunkAudio:" destination="as1-vb-Zco" eventType="touchUpInside" id="XSM-Mj-Mt7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNb-sL-bG4">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" image="darthvader"/>
+                                <connections>
+                                    <action selector="playDarthVaderAudio:" destination="as1-vb-Zco" eventType="touchUpInside" id="rla-8K-hrb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bGW-si-1wW" firstAttribute="top" secondItem="fLm-jA-RrD" secondAttribute="bottom" constant="36" id="3Cy-6C-edq"/>
+                            <constraint firstItem="bGW-si-1wW" firstAttribute="leading" secondItem="V5e-aN-ghx" secondAttribute="leadingMargin" constant="30" id="GUO-Nr-gb0"/>
+                            <constraint firstItem="FNb-sL-bG4" firstAttribute="top" secondItem="fiG-HY-m2g" secondAttribute="bottom" constant="36" id="aup-8T-cFN"/>
                             <constraint firstItem="fLm-jA-RrD" firstAttribute="top" secondItem="6jP-9O-tcm" secondAttribute="bottom" constant="50" id="eJu-AT-7er"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fiG-HY-m2g" secondAttribute="trailing" constant="30" id="gOf-bl-16T"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FNb-sL-bG4" secondAttribute="trailing" constant="30" id="hZ5-eK-wWL"/>
                             <constraint firstItem="fLm-jA-RrD" firstAttribute="leading" secondItem="V5e-aN-ghx" secondAttribute="leadingMargin" constant="30" id="mg6-n3-syp"/>
                             <constraint firstItem="SFO-nU-NZJ" firstAttribute="centerX" secondItem="V5e-aN-ghx" secondAttribute="centerX" id="pbG-Hj-PTl"/>
                             <constraint firstItem="sSG-CH-Vqu" firstAttribute="top" secondItem="SFO-nU-NZJ" secondAttribute="bottom" constant="90" id="r7E-tZ-88u"/>
@@ -140,14 +158,20 @@
                                 <exclude reference="fLm-jA-RrD"/>
                                 <exclude reference="fiG-HY-m2g"/>
                                 <exclude reference="SFO-nU-NZJ"/>
+                                <exclude reference="bGW-si-1wW"/>
+                                <exclude reference="FNb-sL-bG4"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="r7E-tZ-88u"/>
-                                <exclude reference="pbG-Hj-PTl"/>
                                 <exclude reference="eJu-AT-7er"/>
                                 <exclude reference="mg6-n3-syp"/>
+                                <exclude reference="3Cy-6C-edq"/>
+                                <exclude reference="GUO-Nr-gb0"/>
                                 <exclude reference="gOf-bl-16T"/>
                                 <exclude reference="yZF-Ev-eqr"/>
+                                <exclude reference="aup-8T-cFN"/>
+                                <exclude reference="hZ5-eK-wWL"/>
+                                <exclude reference="pbG-Hj-PTl"/>
+                                <exclude reference="r7E-tZ-88u"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -155,14 +179,20 @@
                                 <include reference="fLm-jA-RrD"/>
                                 <include reference="fiG-HY-m2g"/>
                                 <include reference="SFO-nU-NZJ"/>
+                                <include reference="bGW-si-1wW"/>
+                                <include reference="FNb-sL-bG4"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="r7E-tZ-88u"/>
-                                <include reference="pbG-Hj-PTl"/>
                                 <include reference="eJu-AT-7er"/>
                                 <include reference="mg6-n3-syp"/>
+                                <include reference="3Cy-6C-edq"/>
+                                <include reference="GUO-Nr-gb0"/>
                                 <include reference="gOf-bl-16T"/>
                                 <include reference="yZF-Ev-eqr"/>
+                                <include reference="aup-8T-cFN"/>
+                                <include reference="hZ5-eK-wWL"/>
+                                <include reference="pbG-Hj-PTl"/>
+                                <include reference="r7E-tZ-88u"/>
                             </mask>
                         </variation>
                     </view>
@@ -191,6 +221,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chipmunk" width="100" height="100"/>
+        <image name="darthvader" width="100" height="100"/>
         <image name="fast" width="100" height="100"/>
         <image name="microphone" width="100" height="100"/>
         <image name="slow" width="100" height="100"/>

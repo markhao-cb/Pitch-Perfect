@@ -12,6 +12,7 @@ import AVFoundation
 
 class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
 
+    @IBOutlet weak var tapToRecord: UILabel!
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var btnStopRecord: UIButton!
     @IBOutlet weak var btnRecord: UIButton!
@@ -26,6 +27,7 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        tapToRecord.hidden = false
         btnStopRecord.hidden = true
         btnRecord.enabled = true
     }
@@ -36,11 +38,12 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     }
 
     @IBAction func recordAudio(sender: UIButton) {
+        tapToRecord.hidden = true
         recordingInProgress.hidden = false
         btnStopRecord.hidden = false
         btnRecord.enabled = false
 
-        let filePath = self.getAudioFileName()
+        let filePath = getAudioFileName()
         let session = AVAudioSession.sharedInstance()
         try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
         
@@ -57,21 +60,14 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         recordingInProgress.hidden = true
         //TODO: Stop record user's voice
         let session = AVAudioSession.sharedInstance()
-        do {
-            try session.setActive(false)
-        } catch _ {
-            
-        }
+        try! session.setActive(false)
         audioRecorder.stop()
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
         if (flag) {
-            recordedAudio = RecordedAudio()
-            recordedAudio.filePathUrl = recorder.url
-            recordedAudio.title = recorder.url.lastPathComponent
-            
-            self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
+            recordedAudio = RecordedAudio(filePathUrl:recorder.url, title:recorder.url.lastPathComponent!)
+            performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         } else {
             print("Record error")
             btnRecord.enabled = true
@@ -94,7 +90,6 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
         let recordingName = formatter.stringFromDate(currentDateTime) + ".wav"
-//        let recordingName = "my_audio.wav"
         let pathArray = [dirPath, recordingName]
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
         return filePath!

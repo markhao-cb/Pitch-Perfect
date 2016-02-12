@@ -64,10 +64,10 @@
 				4DA5F2E71C56CE40005BF3BC /* AppDelegate.swift */,
 				4DA5F2E91C56CE40005BF3BC /* RecordSoundViewController.swift */,
 				4DA5F2F91C571799005BF3BC /* PlaySoundsViewController.swift */,
+				4DA5F2FF1C58101E005BF3BC /* RecordedAudio.swift */,
 				4DA5F2EB1C56CE40005BF3BC /* Main.storyboard */,
 				4DA5F2EE1C56CE40005BF3BC /* Assets.xcassets */,
 				4DA5F2F01C56CE40005BF3BC /* LaunchScreen.storyboard */,
-				4DA5F2FF1C58101E005BF3BC /* RecordedAudio.swift */,
 			);
 			path = "Pitch Perfect";
 			sourceTree = "<group>";

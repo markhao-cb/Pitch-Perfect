@@ -19,7 +19,6 @@ class PlaySoundsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
 
         audioPlayer = try! AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
         audioPlayer.enableRate = true
@@ -30,18 +29,15 @@ class PlaySoundsViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func playFastAudio(sender: UIButton) {
         resetAudioPlayer()
-        audioPlayer.rate = 1.5
-        playAudio()
+        playAudio(1.5)
     }
     @IBAction func playSlowAudio(sender: UIButton) {
         resetAudioPlayer()
-        audioPlayer.rate = 0.5
-        playAudio()
+        playAudio(0.5)
     }
 
     @IBAction func stopPlayAudio(sender: UIButton) {
@@ -53,10 +49,11 @@ class PlaySoundsViewController: UIViewController {
     }
     
     @IBAction func playDarthVaderAudio(sender: UIButton) {
-        playAudioWithVariablePitch(-1000)
+        playAudioWithReverb(50, preset: .LargeHall2)
     }
-    private func playAudio() {
+    private func playAudio(rate: Float) {
         resetAudioPlayer()
+        audioPlayer.rate = rate
         audioPlayer.currentTime = 0.0
         audioPlayer.play()
     }
@@ -80,19 +77,30 @@ class PlaySoundsViewController: UIViewController {
         audioPlayerNode.play()
     }
     
+    private func playAudioWithReverb(wetDryMix: Float, preset: AVAudioUnitReverbPreset) {
+        resetAudioPlayer()
+        
+        let audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        let audioUnitReverb = AVAudioUnitReverb()
+        audioUnitReverb.loadFactoryPreset(preset)
+        audioUnitReverb.wetDryMix = wetDryMix
+        audioEngine.attachNode(audioUnitReverb)
+        
+        audioEngine.connect(audioPlayerNode, to: audioUnitReverb, format: nil)
+        audioEngine.connect(audioUnitReverb, to: audioEngine.outputNode, format: nil)
+        
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        try! audioEngine.start()
+        
+        audioPlayerNode.play()
+    }
+    
     private func resetAudioPlayer() {
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

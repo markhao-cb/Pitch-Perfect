@@ -9,56 +9,66 @@
 import UIKit
 import AVFoundation
 
-
 class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
+    
+    enum AudioRecorderStatus {
+        case audioRecorderStop, audioRecorderPause, audioRecorderRecording
+    }
 
     @IBOutlet weak var tapToRecord: UILabel!
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var btnStopRecord: UIButton!
     @IBOutlet weak var btnRecord: UIButton!
     
+    
+    
     var audioRecorder:AVAudioRecorder!
     var recordedAudio:RecordedAudio!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-    }
+    var recorderStauts:AudioRecorderStatus!
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         tapToRecord.hidden = false
         btnStopRecord.hidden = true
         btnRecord.enabled = true
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        recorderStauts = AudioRecorderStatus.audioRecorderStop
     }
 
     @IBAction func recordAudio(sender: UIButton) {
-        tapToRecord.hidden = true
-        recordingInProgress.hidden = false
-        btnStopRecord.hidden = false
-        btnRecord.enabled = false
-
-        let filePath = getAudioFileName()
-        let session = AVAudioSession.sharedInstance()
-        try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
         
-        audioRecorder = try! AVAudioRecorder(URL: filePath, settings:[String: String]())
-        audioRecorder.delegate = self
-        audioRecorder.meteringEnabled = true
-        audioRecorder.prepareToRecord()
-        audioRecorder.record()
-        
+        if (recorderStauts == .audioRecorderStop) {
+            
+            tapToRecord.hidden = true
+            recordingInProgress.hidden = false
+            btnStopRecord.hidden = false
+            
+            let filePath = getAudioFileName()
+            let session = AVAudioSession.sharedInstance()
+            try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            
+            audioRecorder = try! AVAudioRecorder(URL: filePath, settings:[String: String]())
+            audioRecorder.delegate = self
+            audioRecorder.meteringEnabled = true
+            audioRecorder.prepareToRecord()
+            audioRecorder.record()
+            recorderStauts = .audioRecorderRecording
+            
+        } else if (recorderStauts == .audioRecorderRecording) {
+            
+            setLabelText("Paused. Tap again to continue.")
+            audioRecorder.pause()
+            recorderStauts = .audioRecorderPause
+            
+        } else {
+           
+            setLabelText("Recording...Tap again to pause.")
+            audioRecorder.record()
+            recorderStauts = .audioRecorderRecording
+        }
     }
 
     @IBAction func stopRecordAudio(sender: UIButton) {
-        //TODO: Hide Record in progresss
         recordingInProgress.hidden = true
-        //TODO: Stop record user's voice
         let session = AVAudioSession.sharedInstance()
         try! session.setActive(false)
         audioRecorder.stop()
@@ -93,6 +103,11 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         let pathArray = [dirPath, recordingName]
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
         return filePath!
+    }
+    
+    private func setLabelText(text: String) {
+        recordingInProgress.text = text
+        recordingInProgress.sizeToFit()
     }
 }
 

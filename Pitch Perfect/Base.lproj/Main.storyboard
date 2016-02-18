@@ -26,11 +26,14 @@
                                     <action selector="recordAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YVy-3d-Nix"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDp-vM-ybV">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording...Tap again to pause" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDp-vM-ybV">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.1098039299249649" green="0.32156863808631897" blue="0.49411767721176147" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="161" y="358" width="78.5" height="20"/>
+                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZW-YY-cdo">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -67,12 +70,12 @@
                             <mask key="constraints">
                                 <exclude reference="fPI-U2-23Z"/>
                                 <exclude reference="nal-aF-JiX"/>
-                                <exclude reference="FJj-SV-mQk"/>
-                                <exclude reference="W3I-w1-vuu"/>
-                                <exclude reference="Apc-BN-HEm"/>
-                                <exclude reference="eIH-Kj-gvO"/>
                                 <exclude reference="eFR-5H-A7X"/>
                                 <exclude reference="mcC-Rf-7T8"/>
+                                <exclude reference="Apc-BN-HEm"/>
+                                <exclude reference="eIH-Kj-gvO"/>
+                                <exclude reference="FJj-SV-mQk"/>
+                                <exclude reference="W3I-w1-vuu"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -85,12 +88,12 @@
                             <mask key="constraints">
                                 <include reference="fPI-U2-23Z"/>
                                 <include reference="nal-aF-JiX"/>
-                                <include reference="FJj-SV-mQk"/>
-                                <include reference="W3I-w1-vuu"/>
-                                <include reference="Apc-BN-HEm"/>
-                                <include reference="eIH-Kj-gvO"/>
                                 <include reference="eFR-5H-A7X"/>
                                 <include reference="mcC-Rf-7T8"/>
+                                <include reference="Apc-BN-HEm"/>
+                                <include reference="eIH-Kj-gvO"/>
+                                <include reference="FJj-SV-mQk"/>
+                                <include reference="W3I-w1-vuu"/>
                             </mask>
                         </variation>
                     </view>
